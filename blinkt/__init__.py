@@ -75,7 +75,6 @@ def _run_forever():
     p.wait()
 
 
-print(check_output('pwd'))
 p = Popen("python -m blinktemu",
           shell=True,
           stdin=PIPE,
