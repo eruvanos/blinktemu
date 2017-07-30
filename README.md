@@ -8,7 +8,9 @@ Emulates blinkt api on non pi devices with a small ui.
 
 ## Install
 
-
+```
+git+https://github.com/eruvanos/blinktemu.git
+```                 `
 
 ## Usage
 
