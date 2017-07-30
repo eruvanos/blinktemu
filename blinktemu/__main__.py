@@ -42,15 +42,30 @@ class BlinktVisual(arcade.Window):
         self.leds = [Pixel(OFF_COLOR) for _ in range(NUMBER_LEDS)]
         self.public_leds = deepcopy(self.leds)
 
+        self.vertical = False
+
         self.queue = Queue()
         self.stdin_reader = StdInReader(self.queue)
         self.stdin_reader.start()
 
+    def toggel_orientation(self):
+        self.vertical = not self.vertical
+
+        if self.vertical:
+            self.set_size(RECT_SIZE, RECT_SIZE * NUMBER_LEDS)
+        else:
+            self.set_size(RECT_SIZE * NUMBER_LEDS, RECT_SIZE)
+
     def on_draw(self):
         arcade.start_render()
         for i in range(8):
-            x = (RECT_SIZE / 2) + i * RECT_SIZE
+            x = (RECT_SIZE / 2)
             y = (RECT_SIZE / 2)
+
+            if self.vertical:
+                y += i * RECT_SIZE
+            else:
+                x += i * RECT_SIZE
 
             led_color = self.public_leds[i].color
             arcade.draw_rectangle_filled(x, y, RECT_SIZE, RECT_SIZE, led_color)
@@ -98,6 +113,9 @@ class BlinktVisual(arcade.Window):
         else:
             log("Unknown command: %s" % command)
 
+    def on_key_press(self, symbol: int, modifiers: int):
+        if symbol == arcade.key.R:
+            self.toggel_orientation()
 
 def main():
     BlinktVisual()

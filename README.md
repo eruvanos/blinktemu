@@ -31,6 +31,9 @@ The emulator supports all official functions from [Blinkt API](http://docs.pimor
 * `blinkt.set_pixel(x, r, g, b, brightness=None)`
 * `blinkt.show()`
 
+### Orientation
+
+Use `R` key to rotate the view. This will show the ui in vertical or horisontal orientation.
 
 ## Limitations
 
