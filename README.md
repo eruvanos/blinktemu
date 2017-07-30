@@ -6,6 +6,8 @@ Emulates blinkt api on non pi devices with a small ui.
 [Where to buy](https://shop.pimoroni.com/products/blinkt)
 
 
+![Preview](./preview.png "Preview")
+
 ## Install
 
 ```shell
