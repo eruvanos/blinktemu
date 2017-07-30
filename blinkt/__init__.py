@@ -76,7 +76,7 @@ def _run_forever():
 
 
 print(check_output('pwd'))
-p = Popen("python blinkt/__main__.py",
+p = Popen("python -m blinktemu",
           shell=True,
           stdin=PIPE,
           universal_newlines=True,
