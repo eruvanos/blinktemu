@@ -1,6 +1,7 @@
 import atexit
 from subprocess import PIPE, Popen, check_output
 
+NUM_PIXELS = 8
 
 def set_all(r, g, b, brightness=None):
     """Set the RGB value and optionally brightness of all pixels
