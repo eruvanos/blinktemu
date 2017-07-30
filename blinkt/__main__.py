@@ -9,7 +9,7 @@ from copy import deepcopy
 NUMBER_LEDS = 8
 RECT_SIZE = 50
 RECT_BORDER = 1
-OFF_COLOR = (0, 0, 0, 0)
+OFF_COLOR = (0, 0, 0, 255)
 
 
 def log(*args):
@@ -60,13 +60,13 @@ class BlinktVisual(arcade.Window):
                                           RECT_BORDER)
 
     def update(self, dt):
-        log("empty?: %s" % self.queue.empty())
+        log("Input is empty: %s" % self.queue.empty())
         if not self.queue.empty():
             try:
                 readlines = self.queue.get()
                 self.process_command(readlines.strip())
             except:
-                log("Error %s" % str(sys.exc_info()))
+                log("Error: %s" % str(sys.exc_info()[1]))
         else:
             log("No input")
 
@@ -75,15 +75,21 @@ class BlinktVisual(arcade.Window):
         if command == "show":
             self.public_leds = deepcopy(self.leds)
             return
-        elif command.startswith("p:"):
+        elif command.startswith("p:"):  # set pixel
             x, *color = [int(v) for v in command[2:].split(",")]
-
             # Keep brightness if not given
             if color[3] == -1:
                 color[3] = self.leds[x].color[3]
-
             self.leds[x].color = color
-        elif command.startswith("b:"):
+        elif command.startswith("a:"):  # set all
+            color = [int(v) for v in command[2:].split(",")]
+
+            for l in self.leds:
+                # Keep brightness if not given
+                if color[3] == -1:
+                    color[3] = l.color[3]
+                l.color = color
+        elif command.startswith("b:"):  # set brightness
             brightness = int(command[2:])
             for l in self.leds:
                 l.color = l.color[:-1] + (brightness,)
