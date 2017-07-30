@@ -20,7 +20,7 @@ def set_all(r, g, b, brightness=None):
 
 def clear():
     """Clear the pixel buffer"""
-    set_all(0, 0, 0)
+    _send_command("a:0,0,0,-1")
 
 
 def set_brightness(brightness: float):
@@ -64,8 +64,7 @@ def show():
 
 
 def _send_command(command: str):
-    p.stdin.write(command)
-    p.stdin.write("\n")
+    p.stdin.write(command+"\n")
 
 
 def _toggel_debug():
